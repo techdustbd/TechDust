@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Techdust | Management Portal</title>
+    
+    <link rel="icon" type="image/png" href="../images/logo.jpg">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .admin-tab-content { display: none; }
+        .admin-tab-content.active-tab { display: block; }
+        .tab-btn.active-tab-btn { background: #ff6600 !important; color: white !important; }
+    </style>
+</head>
+<body style="background-color: #0b132b; color: #ffffff;">
+
+    <!-- Sticky Header / Navbar -->
+    <header class="header" id="navbar">
+        <a href="../index.html" class="logo-container">
+            <img src="../images/logo.jpg" alt="Techdust Logo" class="brand-logo">
+            <span class="brand-name">Tech<span>dust</span> Admin</span>
+        </a>
+
+        <ul class="nav-links" id="nav-menu">
+            <li><a href="../index.html">Home Site</a></li>
+            <li><a href="#" id="logout-btn" style="display: none;"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+    </header>
+
+    <!-- Admin Login Modal / Overlay -->
+    <div id="admin-auth-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0b132b; z-index: 9999; justify-content: center; align-items: center; padding: 20px;">
+        <div style="background: #131c38; border: 2px solid #ff6600; padding: 40px; border-radius: 12px; width: 100%; max-width: 420px; box-shadow: 0 10px 40px rgba(0,0,0,0.6); text-align: center;">
+            <div style="margin-bottom: 25px;">
+                <img src="../images/logo.jpg" alt="Techdust Logo" style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid #ff9944; margin-bottom: 15px;">
+                <h2 style="color: #ffffff; margin: 0; font-size: 1.8rem;">Admin <span style="color: #ff6600;">Authentication</span></h2>
+                <p style="color: #ffcc99; font-size: 0.9rem; margin-top: 5px;">Restricted area. Please sign in with admin credentials.</p>
+            </div>
+
+            <form id="admin-login-form">
+                <div style="margin-bottom: 15px; text-align: left;">
+                    <label style="display: block; margin-bottom: 6px; color: #ffcc99; font-weight: 600; font-size: 0.9rem;">Username</label>
+                    <div style="position: relative;">
+                        <i class="fa-solid fa-user" style="position: absolute; left: 14px; top: 15px; color: #ff9944;"></i>
+                        <input type="text" id="auth-username" placeholder="Enter admin username" required style="width: 100%; padding: 12px 12px 12px 42px; background: #0b132b; border: 1px solid #ff9944; border-radius: 6px; color: #ffffff; font-size: 1rem;">
+                    </div>
+                </div>
+                <div style="margin-bottom: 25px; text-align: left;">
+                    <label style="display: block; margin-bottom: 6px; color: #ffcc99; font-weight: 600; font-size: 0.9rem;">Password</label>
+                    <div style="position: relative;">
+                        <i class="fa-solid fa-lock" style="position: absolute; left: 14px; top: 15px; color: #ff9944;"></i>
+                        <input type="password" id="auth-password" placeholder="Enter admin password" required style="width: 100%; padding: 12px 12px 12px 42px; background: #0b132b; border: 1px solid #ff9944; border-radius: 6px; color: #ffffff; font-size: 1rem;">
+                    </div>
+                </div>
+                <div id="auth-error-msg" style="color: #ff4d4d; font-size: 0.85rem; margin-bottom: 15px; display: none;">Invalid username or password. Please try again.</div>
+                <button type="submit" id="auth-login-btn" style="width: 100%; padding: 14px; background: #ff6600; color: white; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; text-transform: uppercase;">Authenticate</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard Section -->
+    <section style="padding-top: 140px; padding-bottom: 80px; max-width: 1200px; margin: 0 auto; padding-left: 20px; padding-right: 20px;">
+        
+        <!-- Tab Navigation Menu -->
+        <div style="display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 2px solid #131c38; padding-bottom: 15px; flex-wrap: wrap;">
+            <button class="tab-btn active-tab-btn" onclick="switchTab('enrollments')" style="background: #131c38; color: #ffcc99; border: 1px solid #ff9944; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s;">
+                <i class="fa-solid fa-users-line" style="margin-right: 8px;"></i> Student Enrollments
+            </button>
+            <button class="tab-btn" onclick="switchTab('courses')" style="background: #131c38; color: #ffcc99; border: 1px solid #ff9944; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s;">
+                <i class="fa-solid fa-graduation-cap" style="margin-right: 8px;"></i> Manage Courses
+            </button>
+            <button class="tab-btn" onclick="switchTab('gallery')" style="background: #131c38; color: #ffcc99; border: 1px solid #ff9944; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s;">
+                <i class="fa-solid fa-images" style="margin-right: 8px;"></i> Manage Gallery
+            </button>
+        </div>
+
+        <!-- ================= TAB 1: ENROLLMENTS ================= -->
+        <div id="tab-enrollments" class="admin-tab-content active-tab">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;">
+                <div>
+                    <h1 style="color: #ffffff; font-size: 2rem;">Student <span style="color: #ff6600;">Enrollments</span></h1>
+                    <p style="color: #ffcc99; margin-top: 5px;">Manage incoming inquiries and course registration records.</p>
+                </div>
+                <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+                    <button id="open-add-modal-btn" style="background: #ff6600; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-user-plus"></i> Add Enrollment
+                    </button>
+                    <div style="background: #131c38; border: 1px solid #ff9944; padding: 12px 20px; border-radius: 8px; font-weight: 600;">
+                        Total Submissions: <span id="total-count" style="color: #ff6600;">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: #131c38; border: 2px solid #ff6600; border-radius: 12px; overflow-x: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+                <table style="width: 100%; border-collapse: collapse; text-align: left; min-width: 850px;">
+                    <thead>
+                        <tr style="background: #0b132b; border-bottom: 2px solid #ff9944; color: #ffcc99;">
+                            <th style="padding: 16px;">Date & Time</th>
+                            <th style="padding: 16px;">Student Name</th>
+                            <th style="padding: 16px;">Email Address</th>
+                            <th style="padding: 16px;">Phone Number</th>
+                            <th style="padding: 16px;">Selected Course</th>
+                            <th style="padding: 16px; text-align: center;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="enrollments-table-body">
+                        <tr><td colspan="6" style="padding: 30px; text-align: center; color: #ffcc99;">Loading enrollments...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ================= TAB 2: COURSES MANAGEMENT ================= -->
+        <div id="tab-courses" class="admin-tab-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;">
+                <div>
+                    <h1 style="color: #ffffff; font-size: 2rem;">Platform <span style="color: #ff6600;">Courses</span></h1>
+                    <p style="color: #ffcc99; margin-top: 5px;">Add or delete courses displayed across your website and dropdowns.</p>
+                </div>
+                <button id="open-course-modal-btn" style="background: #ff6600; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-plus-circle"></i> Add New Course
+                </button>
+            </div>
+
+            <div style="background: #131c38; border: 2px solid #ff6600; border-radius: 12px; overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; text-align: left; min-width: 700px;">
+                    <thead>
+                        <tr style="background: #0b132b; border-bottom: 2px solid #ff9944; color: #ffcc99;">
+                            <th style="padding: 16px;">Course Title</th>
+                            <th style="padding: 16px;">Price (BDT)</th>
+                            <th style="padding: 16px;">Description</th>
+                            <th style="padding: 16px; text-align: center;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="courses-table-body">
+                        <tr><td colspan="4" style="padding: 30px; text-align: center; color: #ffcc99;">Loading courses...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ================= TAB 3: GALLERY MANAGEMENT ================= -->
+        <div id="tab-gallery" class="admin-tab-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;">
+                <div>
+                    <h1 style="color: #ffffff; font-size: 2rem;">Gallery <span style="color: #ff6600;">Images</span></h1>
+                    <p style="color: #ffcc99; margin-top: 5px;">Manage photos shown in your platform gallery section.</p>
+                </div>
+                <button id="open-gallery-modal-btn" style="background: #ff6600; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-image"></i> Add Image URL
+                </button>
+            </div>
+
+            <div id="gallery-grid-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
+                <p style="color: #ffcc99;">Loading gallery images...</p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Modals for Adding Courses & Gallery Images -->
+    <div id="course-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center; padding: 20px;">
+        <div style="background: #131c38; border: 2px solid #ff6600; padding: 30px; border-radius: 12px; width: 100%; max-width: 450px; max-height: 90vh; overflow-y: auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="color: #ffffff; margin: 0;">Add New Course</h3>
+                <button id="close-course-modal" style="background: transparent; border: none; color: #ffcc99; font-size: 1.4rem; cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="add-course-form">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 6px; color: #ffcc99; font-weight: 600;">Course Title</label>
+                    <input type="text" id="course-title" placeholder="e.g. Python for Beginners" required style="width: 100%; padding: 12px; background: #0b132b; border: 1px solid #ff9944; border-radius: 6px; color: #ffffff;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 6px; color: #ffcc99; font-weight: 600;">Price (e.g. ৳ 8,000)</label>
+                    <input type="text" id="course-price" placeholder="৳ 8,000" required style="width: 100%; padding: 12px; background: #0b132b; border: 1px solid #ff9944; border-radius: 6px; color: #ffffff;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 6px; color: #ffcc99; font-weight: 600;">Course Image URL</label>
+                    <input type="url" id="course-image" placeholder="images/web.png or https://..." required style="width: 100%; padding: 12px; background: #0b132b; border: 1px solid #ff9944; border-radius: 6px; color: #ffffff;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 6px; color: #ffcc99; font-weight: 600;">Badge Label</label>
+                    <input type="text" id="course-badge" placeholder="e.g. Best Seller, Popular, New" value="Featured" required style="width: 100%; padding: 12px; background: #0b132b; border: 1px solid #ff9944; border-radius: 6px; color: #ffffff;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 6px; color: #ffcc99; font-weight: 600;">Short Description</label>
+                    <textarea id="course-desc" placeholder="Brief outline..." rows="3" required style="width: 100%; padding: 12px; background: #0b132b; border: 1px solid #ff9944; border-radius: 6px; color: #ffffff;"></textarea>
+                </div>
+                <button type="submit" style="width: 100%; padding: 12px; background: #ff6600; color: white; border: none; border-radius: 6px; font-weight: 700; cursor: pointer;">Save Course</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="gallery-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center; padding: 20px;">
+        <div style="background: #131c38; border: 2px solid #ff6600; padding: 30px; border-radius: 12px; width: 100%; max-width: 450px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="color: #ffffff; margin: 0;">Add Gallery Image</h3>
+                <button id="close-gallery-modal" style="background: transparent; border: none; color: #ffcc99; font-size: 1.4rem; cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="add-gallery-form">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 6px; color: #ffcc99; font-weight: 600;">Image Direct URL</label>
+                    <input type="url" id="gallery-url" placeholder="https://example.com/image.jpg" required style="width: 100%; padding: 12px; background: #0b132b; border: 1px solid #ff9944; border-radius: 6px; color: #ffffff;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 6px; color: #ffcc99; font-weight: 600;">Image Caption / Title</label>
+                    <input type="text" id="gallery-caption" placeholder="Workshop Batch 4" required style="width: 100%; padding: 12px; background: #0b132b; border: 1px solid #ff9944; border-radius: 6px; color: #ffffff;">
+                </div>
+                <button type="submit" style="width: 100%; padding: 12px; background: #ff6600; color: white; border: none; border-radius: 6px; font-weight: 700; cursor: pointer;">Save Image</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Original Add Enrollment Modal -->
+    <div id="add-enrollment-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center; padding: 20px;">
+        <div style="background: #131c38; border: 2px solid #ff6600; padding: 30px; border-radius: 12px; width: 100%; max-width: 500px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="color: #ffffff; margin: 0;">Add New Enrollment</h3>
+                <button id="close-modal-btn" style="background: transparent; border: none; color: #ffcc99; font-size: 1.4rem; cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="admin-add-form">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 6px; color: #ffcc99; font-weight: 600;">Student Full Name</label>
+                    <input type="text" id="admin-name" required style="width: 100%; padding: 12px; background: #0b132b; border: 1px solid #ff9944; border-radius: 6px; color: #ffffff;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 6px; color: #ffcc99; font-weight: 600;">Email Address</label>
+                    <input type="email" id="admin-email" required style="width: 100%; padding: 12px; background: #0b132b; border: 1px solid #ff9944; border-radius: 6px; color: #ffffff;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 6px; color: #ffcc99; font-weight: 600;">Phone Number</label>
+                    <input type="tel" id="admin-phone" required style="width: 100%; padding: 12px; background: #0b132b; border: 1px solid #ff9944; border-radius: 6px; color: #ffffff;">
+                </div>
+                <div style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 6px; color: #ffcc99; font-weight: 600;">Select Course</label>
+                    <select id="admin-course" required style="width: 100%; padding: 12px; background: #0b132b; border: 1px solid #ff9944; border-radius: 6px; color: #ffffff;">
+                        <option value="">-- Choose a Course --</option>
+                    </select>
+                </div>
+                <button type="submit" style="width: 100%; padding: 14px; background: #ff6600; color: white; border: none; border-radius: 6px; font-weight: 700; cursor: pointer;">Save Enrollment</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase Script Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, addDoc, doc, deleteDoc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD9OvNGoKbTFUvNu_XDI8v9gQFjLM80DuA",
+            authDomain: "techdust-55034.firebaseapp.com",
+            projectId: "techdust-55034",
+            storageBucket: "techdust-55034.firebasestorage.app",
+            messagingSenderId: "354705627446",
+            appId: "1:354705627446:web:4df6bfb2a5e7d98704fb97",
+            measurementId: "G-1WW44Z8N8L"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Tab Switching Logic
+        window.switchTab = function(tabName) {
+            document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.remove('active-tab'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active-tab-btn'));
+
+            document.getElementById('tab-' + tabName).classList.add('active-tab');
+            event.currentTarget.classList.add('active-tab-btn');
+        };
+
+        // Security Authentication
+        const authOverlay = document.getElementById('admin-auth-overlay');
+        const adminLoginForm = document.getElementById('admin-login-form');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        function checkAdminAuth() {
+            if (localStorage.getItem("techdust_admin_auth") === "true") {
+                authOverlay.style.display = "none";
+                logoutBtn.style.display = "inline-block";
+                loadAllData();
+            } else {
+                authOverlay.style.display = "flex";
+                logoutBtn.style.display = "none";
+            }
+        }
+
+        adminLoginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (document.getElementById('auth-username').value.trim() === "techdust" && document.getElementById('auth-password').value.trim() === "TechControll01") {
+                localStorage.setItem("techdust_admin_auth", "true");
+                authOverlay.style.display = "none";
+                logoutBtn.style.display = "inline-block";
+                loadAllData();
+            } else {
+                document.getElementById('auth-error-msg').style.display = "block";
+            }
+        });
+
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem("techdust_admin_auth");
+            location.reload();
+        });
+
+        function loadAllData() {
+            loadEnrollments();
+            loadCourses();
+            loadGallery();
+        }
+
+        // --- ENROLLMENTS LOGIC ---
+        async function loadEnrollments() {
+            const tableBody = document.getElementById('enrollments-table-body');
+            const totalCountEl = document.getElementById('total-count');
+            try {
+                const q = query(collection(db, "enrollments"), orderBy("timestamp", "desc"));
+                const snap = await getDocs(q);
+                tableBody.innerHTML = "";
+                if (snap.empty) {
+                    tableBody.innerHTML = `<tr><td colspan="6" style="padding: 30px; text-align: center; color: #ffcc99;">No enrollments found.</td></tr>`;
+                    totalCountEl.innerText = "0";
+                    return;
+                }
+                let count = 0;
+                snap.forEach(docSnap => {
+                    count++;
+                    const data = docSnap.data();
+                    tableBody.innerHTML += `
+                        <tr style="border-bottom: 1px solid rgba(255,153,68,0.2);">
+                            <td style="padding: 16px;">${data.timestamp?.toDate ? data.timestamp.toDate().toLocaleString() : 'Recent'}</td>
+                            <td style="padding: 16px; font-weight: 600;">${escapeHTML(data.studentName || "")}</td>
+                            <td style="padding: 16px; color: #ffcc99;">${escapeHTML(data.studentEmail || "")}</td>
+                            <td style="padding: 16px;">${escapeHTML(data.phoneNumber || "")}</td>
+                            <td style="padding: 16px;"><span style="background: rgba(255,102,0,0.15); color: #ff6600; padding: 4px 8px; border-radius: 4px;">${escapeHTML(data.selectedCourse || "")}</span></td>
+                            <td style="padding: 16px; text-align: center;"><button onclick="deleteDocItem('enrollments', '${docSnap.id}')" style="background: #cc0000; color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-trash"></i></button></td>
+                        </tr>`;
+                });
+                totalCountEl.innerText = count;
+            } catch (err) { console.error(err); }
+        }
+
+        document.getElementById('admin-add-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                await addDoc(collection(db, "enrollments"), {
+                    studentName: document.getElementById('admin-name').value,
+                    studentEmail: document.getElementById('admin-email').value,
+                    phoneNumber: document.getElementById('admin-phone').value,
+                    selectedCourse: document.getElementById('admin-course').value,
+                    timestamp: serverTimestamp()
+                });
+                alert("Enrollment added successfully!");
+                document.getElementById('admin-add-form').reset();
+                document.getElementById('add-enrollment-modal').style.display = 'none';
+                loadEnrollments();
+            } catch (err) { alert("Failed to add enrollment."); }
+        });
+
+        // --- COURSES LOGIC ---
+        async function loadCourses() {
+            const tbody = document.getElementById('courses-table-body');
+            const selectDropdown = document.getElementById('admin-course');
+            try {
+                const snap = await getDocs(collection(db, "courses"));
+                tbody.innerHTML = "";
+                selectDropdown.innerHTML = `<option value="">-- Choose a Course --</option>`;
+                if (snap.empty) {
+                    tbody.innerHTML = `<tr><td colspan="4" style="padding: 30px; text-align: center; color: #ffcc99;">No courses added yet.</td></tr>`;
+                    return;
+                }
+                snap.forEach(docSnap => {
+                    const data = docSnap.data();
+                    tbody.innerHTML += `
+                        <tr style="border-bottom: 1px solid rgba(255,153,68,0.2);">
+                            <td style="padding: 16px; font-weight: 600;">${escapeHTML(data.title)}</td>
+                            <td style="padding: 16px; color: #ff6600;">${escapeHTML(data.price)}</td>
+                            <td style="padding: 16px; color: #ffcc99;">${escapeHTML(data.description)}</td>
+                            <td style="padding: 16px; text-align: center;"><button onclick="deleteDocItem('courses', '${docSnap.id}')" style="background: #cc0000; color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-trash"></i></button></td>
+                        </tr>`;
+                    selectDropdown.innerHTML += `<option value="${escapeHTML(data.title)}">${escapeHTML(data.title)} (${escapeHTML(data.price)})</option>`;
+                });
+            } catch (err) { console.error(err); }
+        }
+
+        document.getElementById('add-course-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                await addDoc(collection(db, "courses"), {
+                    title: document.getElementById('course-title').value,
+                    price: document.getElementById('course-price').value,
+                    image: document.getElementById('course-image').value,
+                    badge: document.getElementById('course-badge').value,
+                    description: document.getElementById('course-desc').value,
+                    timestamp: serverTimestamp()
+                });
+                alert("Course added successfully!");
+                document.getElementById('add-course-form').reset();
+                document.getElementById('course-modal').style.display = 'none';
+                loadCourses();
+            } catch (err) { alert("Failed to add course."); }
+        });
+
+        // --- GALLERY LOGIC ---
+        async function loadGallery() {
+            const grid = document.getElementById('gallery-grid-container');
+            try {
+                const snap = await getDocs(collection(db, "gallery"));
+                grid.innerHTML = "";
+                if (snap.empty) {
+                    grid.innerHTML = `<p style="color: #ffcc99; grid-column: 1/-1;">No gallery images uploaded yet.</p>`;
+                    return;
+                }
+                snap.forEach(docSnap => {
+                    const data = docSnap.data();
+                    grid.innerHTML += `
+                        <div style="background: #0b132b; border: 1px solid #ff9944; border-radius: 8px; overflow: hidden; position: relative;">
+                            <img src="${escapeHTML(data.url)}" alt="${escapeHTML(data.caption)}" style="width: 100%; height: 160px; object-fit: cover;">
+                            <div style="padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 0.9rem; font-weight: 600; color: #ffffff;">${escapeHTML(data.caption)}</span>
+                                <button onclick="deleteDocItem('gallery', '${docSnap.id}')" style="background: #cc0000; color: white; border: none; padding: 5px 8px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>`;
+                });
+            } catch (err) { console.error(err); }
+        }
+
+        document.getElementById('add-gallery-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                await addDoc(collection(db, "gallery"), {
+                    url: document.getElementById('gallery-url').value,
+                    caption: document.getElementById('gallery-caption').value,
+                    timestamp: serverTimestamp()
+                });
+                alert("Image added to gallery!");
+                document.getElementById('add-gallery-form').reset();
+                document.getElementById('gallery-modal').style.display = 'none';
+                loadGallery();
+            } catch (err) { alert("Failed to add image."); }
+        });
+
+        // Universal Delete Function
+        window.deleteDocItem = async function(collectionName, docId) {
+            if (confirm("Are you sure you want to delete this record?")) {
+                try {
+                    await deleteDoc(doc(db, collectionName, docId));
+                    alert("Deleted successfully!");
+                    loadAllData();
+                } catch (err) { alert("Failed to delete."); }
+            }
+        };
+
+        // Modal Controls
+        document.getElementById('open-add-modal-btn').onclick = () => document.getElementById('add-enrollment-modal').style.display = 'flex';
+        document.getElementById('close-modal-btn').onclick = () => document.getElementById('add-enrollment-modal').style.display = 'none';
+        
+        document.getElementById('open-course-modal-btn').onclick = () => document.getElementById('course-modal').style.display = 'flex';
+        document.getElementById('close-course-modal').onclick = () => document.getElementById('course-modal').style.display = 'none';
+
+        document.getElementById('open-gallery-modal-btn').onclick = () => document.getElementById('gallery-modal').style.display = 'flex';
+        document.getElementById('close-gallery-modal').onclick = () => document.getElementById('gallery-modal').style.display = 'none';
+
+        function escapeHTML(str) {
+            return String(str).replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
+        }
+
+        window.addEventListener('DOMContentLoaded', checkAdminAuth);
+    </script>
+</body>
+</html>

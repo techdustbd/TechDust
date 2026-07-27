@@ -1,0 +1,608 @@
+/* ==========================================
+   Techdust - Main Stylesheet
+   Color Palette: Orange, Dark Blue, Red
+   ========================================== */
+
+/* CSS Reset & Variables */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-orange: #ff6600;
+    --dark-blue: #0b132b;
+    --accent-red: #e63946;
+    --light-bg: #f8f9fa;
+    --white: #ffffff;
+    --text-color: #333333;
+    --transition-speed: 0.3s ease;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    background-color: var(--white);
+    line-height: 1.6;
+}
+
+/* Utility Classes */
+.text-red {
+    color: var(--accent-red);
+}
+
+/* ==========================================
+   Header & Navigation
+   ========================================== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--dark-blue);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform var(--transition-speed);
+}
+
+/* Auto-hiding header state controlled by script.js */
+.header-hidden {
+    transform: translateY(-100%);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 10px;
+}
+
+.brand-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.brand-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.brand-name span {
+    color: var(--primary-orange);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 25px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: var(--white);
+    font-weight: 500;
+    transition: color var(--transition-speed);
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+    color: var(--primary-orange);
+}
+
+/* Student Login & Call To Action Buttons */
+.nav-login {
+    color: var(--white);
+}
+
+.nav-cta {
+    background-color: var(--primary-orange);
+    color: var(--white) !important;
+    padding: 10px 20px;
+    border-radius: 4px;
+    white-space: nowrap;
+    display: inline-block;
+    transition: background-color var(--transition-speed);
+}
+
+.nav-cta:hover {
+    background-color: var(--accent-red);
+}
+
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* ==========================================
+   Hero Section (7 Years Success Layout)
+   ========================================== */
+.hero-section {
+    padding: 140px 5% 80px 5%;
+    background-color: #fdfaf6; /* soft cream background matching screenshot */
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.hero-text-content h1 {
+    font-size: 3.5rem;
+    color: var(--accent-red);
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.hero-text-content p {
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-primary-red {
+    background-color: var(--accent-red);
+    color: var(--white);
+    padding: 12px 25px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: opacity var(--transition-speed);
+}
+
+.btn-primary-red:hover {
+    opacity: 0.9;
+}
+
+.btn-outline-light {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 2px solid #ccc;
+    padding: 12px 25px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all var(--transition-speed);
+}
+
+.btn-outline-light:hover {
+    border-color: var(--dark-blue);
+    color: var(--dark-blue);
+}
+
+.hero-image-content img {
+    width: 100%;
+    max-width: 650px;
+    height: auto;
+    transform: scale(1.05);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    object-fit: cover;
+}
+
+/* ==========================================
+   Courses Section
+   ========================================== */
+.courses-section {
+    padding: 80px 5%;
+    background-color: var(--white);
+}
+
+.courses-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.courses-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.courses-header h2 {
+    font-size: 2.5rem;
+    color: var(--dark-blue);
+    margin-bottom: 15px;
+}
+
+.courses-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.course-card {
+    background: var(--light-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.course-img {
+    position: relative;
+    height: 200px;
+}
+
+.course-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.course-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: var(--primary-orange);
+    color: var(--white);
+    padding: 5px 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 20px;
+}
+
+.course-content {
+    padding: 25px;
+}
+
+.course-content h3 {
+    font-size: 1.3rem;
+    color: var(--dark-blue);
+    margin-bottom: 12px;
+}
+
+.course-content p {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+.course-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+.course-price {
+    font-weight: 700;
+    color: var(--accent-red);
+    font-size: 1.1rem;
+}
+
+.course-btn {
+    text-decoration: none;
+    color: var(--dark-blue);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color var(--transition-speed);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.course-btn:hover {
+    color: var(--primary-orange);
+}
+
+/* ==========================================
+   Features Section (Why Choose Us)
+   ========================================== */
+.features-section {
+    padding: 80px 5%;
+    background-color: var(--light-bg);
+}
+
+.features-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.features-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.features-header h2 {
+    font-size: 2.5rem;
+    color: var(--dark-blue);
+    margin-bottom: 15px;
+}
+
+.features-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    background: var(--white);
+    padding: 40px 30px;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform var(--transition-speed);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: var(--primary-orange);
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    font-size: 1.3rem;
+    color: var(--dark-blue);
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* ==========================================
+   Footer
+   ========================================== */
+.footer {
+    background-color: var(--dark-blue);
+    color: var(--white);
+    padding: 60px 5% 20px 5%;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-col h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.footer-col h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--primary-orange);
+}
+
+.footer-logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.footer-logo {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.footer-logo-area h3::after {
+    display: none;
+}
+
+.footer-about {
+    color: #aaa;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.footer-links,
+.footer-contact-info {
+    list-style: none;
+}
+
+.footer-links li,
+.footer-contact-info li {
+    margin-bottom: 10px;
+}
+
+.footer-links li a {
+    text-decoration: none;
+    color: #aaa;
+    transition: color var(--transition-speed);
+}
+
+.footer-links li a:hover {
+    color: var(--primary-orange);
+}
+
+.footer-contact-info li {
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+}
+
+.footer-contact-info li i {
+    color: var(--primary-orange);
+}
+
+.footer-socials {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.footer-socials a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 38px;
+    height: 38px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--white);
+    border-radius: 50%;
+    text-decoration: none;
+    transition: background-color var(--transition-speed);
+}
+
+.footer-socials a:hover {
+    background-color: var(--primary-orange);
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* ==========================================
+   Responsive Media Queries
+   ========================================== */
+@media (max-width: 968px) {
+    .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-text-content h1 {
+        font-size: 2.8rem;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    /* Fixed full-height sliding mobile drawer */
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background-color: var(--dark-blue);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 20px;
+        padding-top: 40px;
+        transition: left 0.3s ease-in-out;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        overflow-y: auto;
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-links li {
+        width: 80%;
+        text-align: center;
+        margin-bottom: 0;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 12px;
+        font-size: 1.1rem;
+    }
+
+    .nav-cta {
+        display: block;
+        text-align: center;
+    }
+}
+
+/* ==========================================
+   Custom Scrollbar Matching Website Theme
+   ========================================== */
+
+/* For Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-orange) var(--dark-blue);
+}
+
+/* For Chrome, Edge, and Safari */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-blue);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary-orange);
+    border-radius: 5px;
+    border: 2px solid var(--dark-blue);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent-red);
+}

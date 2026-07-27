@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us & Enrollment - Techdust | Professional IT Training & Learning Platform</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Get in touch with Techdust or enroll in our professional IT courses in Bangladesh. Reach out via phone, email, or our online registration form.">
+    <meta name="keywords" content="Contact Techdust, IT training center contact, enroll in IT course, Techdust support, Bangladesh">
+    <meta name="author" content="Techdust">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Contact Us & Enrollment - Techdust">
+    <meta property="og:description" content="Connect with Techdust to start your IT career journey or ask any questions about our courses.">
+    <meta property="og:image" content="../images/logo.jpg">
+    <meta property="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="../images/logo.jpg">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Schema.org Structured Data for Educational Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "Techdust",
+      "url": "https://www.techdust.org",
+      "logo": "https://www.techdust.org/images/logo.jpg",
+      "email": "techdustbd@gmail.com",
+      "telephone": "01795883259",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "BD"
+      },
+      "sameAs": [
+        "https://www.facebook.com",
+        "https://www.youtube.com",
+        "https://www.linkedin.com"
+      ]
+    }
+    </script>
+</head>
+<body>
+
+    <!-- Sticky & Hiding Header / Navbar -->
+    <header class="header" id="navbar">
+        <a href="../index.html" class="logo-container">
+            <img src="../images/logo.jpg" alt="Techdust Logo" class="brand-logo">
+            <span class="brand-name">Tech<span>dust</span></span>
+        </a>
+
+        <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <ul class="nav-links" id="nav-menu">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html" class="active">Contact Us</a></li>
+            <li><a href="login.html" class="nav-login"><i class="fa-solid fa-user"></i> Student Login</a></li>
+            <li><a href="contact.html" class="nav-cta">Enroll Now</a></li>
+        </ul>
+    </header>
+
+    <!-- Page Header Section -->
+    <section class="hero-section" style="min-height: 40vh; padding-top: 150px; padding-bottom: 40px; text-align: center;">
+        <div class="hero-container" style="grid-template-columns: 1fr; text-align: center;">
+            <div class="hero-text-content">
+                <h1>Contact & <span class="text-red">Enrollment</span></h1>
+                <p style="max-width: 700px; margin: 0 auto; color: #000000;">Have questions or ready to kickstart your tech career? Fill out the form below or reach us directly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Enrollment Form Section -->
+    <section class="features-section" style="padding-top: 20px; padding-bottom: 80px;">
+        <div class="features-container" style="max-width: 800px;">
+            
+            <form id="enrollment-form" style="background: #131c38; border: 2px solid #ff6600; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+                <h2 style="text-align: center; margin-bottom: 30px; color: #ffffff;">Course Enrollment / <span class="text-red">Inquiry</span></h2>
+                
+                <div style="margin-bottom: 20px;">
+                    <label for="name" style="display: block; margin-bottom: 8px; color: #ffcc99; font-weight: 600; font-size: 1.05rem;">Full Name</label>
+                    <input type="text" id="name" name="name" autocomplete="name" placeholder="Enter your full name" required style="width: 100%; padding: 14px 16px; background: #0b132b; border: 1px solid #ff9944; border-radius: 6px; color: #ffffff; font-size: 1rem; font-weight: 500;">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="email" style="display: block; margin-bottom: 8px; color: #ffcc99; font-weight: 600; font-size: 1.05rem;">Email Address</label>
+                    <input type="email" id="email" name="email" autocomplete="email" placeholder="Enter your email address" required style="width: 100%; padding: 14px 16px; background: #0b132b; border: 1px solid #ff9944; border-radius: 6px; color: #ffffff; font-size: 1rem; font-weight: 500;">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="phone" style="display: block; margin-bottom: 8px; color: #ffcc99; font-weight: 600; font-size: 1.05rem;">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="Enter your phone number" required style="width: 100%; padding: 14px 16px; background: #0b132b; border: 1px solid #ff9944; border-radius: 6px; color: #ffffff; font-size: 1rem; font-weight: 500;">
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <label for="course-select" style="display: block; margin-bottom: 8px; color: #ffcc99; font-weight: 600; font-size: 1.05rem;">Select Course</label>
+                    <select id="course-select" name="selected-course" required style="width: 100%; padding: 14px 16px; background: #0b132b; border: 1px solid #ff9944; border-radius: 6px; color: #ffffff; font-size: 1rem; font-weight: 500;">
+                        <option value="">-- Choose a Course --</option>
+                        <option value="Graphics Design Masterclass">Graphics Design Masterclass (৳ 5,000)</option>
+                        <option value="Digital Marketing & SEO">Digital Marketing & SEO (৳ 10,000)</option>
+                        <option value="Web Development">Web Development (৳ 12,000)</option>
+                        <option value="Cyber Security & Ethical Hacking">Cyber Security & Ethical Hacking (৳ 15,000)</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="submit-btn" class="btn-primary-red" style="width: 100%; padding: 16px; font-size: 1.1rem; border: none; border-radius: 6px; cursor: pointer; text-transform: uppercase; font-weight: 700; background-color: #ff6600; color: #ffffff; transition: background 0.3s;">Submit Enrollment</button>
+            </form>
+
+            <!-- Quick Direct Info Box -->
+            <div style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; text-align: center;">
+                <div style="background: #131c38; padding: 25px; border-radius: 8px; border: 1px solid #ff9944;">
+                    <i class="fa-solid fa-phone" style="color: #ff6600; font-size: 26px; margin-bottom: 12px;"></i>
+                    <h4 style="color: #ffffff; margin-bottom: 8px; font-size: 1.1rem;">Call Us</h4>
+                    <p style="color: #ffcc99; font-size: 1rem; font-weight: 500;">01795883259</p>
+                </div>
+                <div style="background: #131c38; padding: 25px; border-radius: 8px; border: 1px solid #ff9944;">
+                    <i class="fa-solid fa-envelope" style="color: #ff6600; font-size: 26px; margin-bottom: 12px;"></i>
+                    <h4 style="color: #ffffff; margin-bottom: 8px; font-size: 1.1rem;">Email Us</h4>
+                    <p style="color: #ffcc99; font-size: 1rem; font-weight: 500;">techdustbd@gmail.com</p>
+                </div>
+                <div style="background: #131c38; padding: 25px; border-radius: 8px; border: 1px solid #ff9944;">
+                    <i class="fa-solid fa-location-dot" style="color: #ff6600; font-size: 26px; margin-bottom: 12px;"></i>
+                    <h4 style="color: #ffffff; margin-bottom: 8px; font-size: 1.1rem;">Location</h4>
+                    <p style="color: #ffcc99; font-size: 1rem; font-weight: 500;">Bangladesh</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Professional Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <div class="footer-logo-area">
+                    <img src="../images/logo.jpg" alt="Techdust Logo" class="footer-logo">
+                    <h3>Techdust</h3>
+                </div>
+                <p class="footer-about">Empowering the next generation of tech professionals with expert-led training, hands-on practical skills, and career readiness.</p>
+            </div>
+
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="login.html">Student Login</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Contact Info</h3>
+                <ul class="footer-contact-info">
+                    <li><i class="fa-solid fa-phone"></i> 01795883259</li>
+                    <li><i class="fa-solid fa-envelope"></i> techdustbd@gmail.com</li>
+                    <li><i class="fa-solid fa-location-dot"></i> Bangladesh</li>
+                </ul>
+                <div class="footer-socials">
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 Techdust. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- External JavaScript File -->
+    <script src="../js/script.js"></script>
+
+    <!-- Firebase Authentication & Firestore Database Integration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, query, where, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD9OvNGoKbTFUvNu_XDI8v9gQFjLM80DuA",
+            authDomain: "techdust-55034.firebaseapp.com",
+            projectId: "techdust-55034",
+            storageBucket: "techdust-55034.firebasestorage.app",
+            messagingSenderId: "354705627446",
+            appId: "1:354705627446:web:4df6bfb2a5e7d98704fb97",
+            measurementId: "G-1WW44Z8N8L"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+
+        // Navbar Authentication & Logout state observer
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            const loginNavLinks = document.querySelectorAll('.nav-login');
+            
+            loginNavLinks.forEach(loginLink => {
+                const newLink = loginLink.cloneNode(true);
+                loginLink.parentNode.replaceChild(newLink, loginLink);
+
+                if (user) {
+                    // Auto-fill form fields if user is logged in
+                    const nameInput = document.getElementById('name');
+                    const emailInput = document.getElementById('email');
+                    if (nameInput && !nameInput.value) nameInput.value = user.displayName || "";
+                    if (emailInput && !emailInput.value) emailInput.value = user.email || "";
+
+                    const photoURL = user.photoURL;
+                    if (photoURL) {
+                        newLink.innerHTML = `<img src="${photoURL}" alt="Profile" style="width: 26px; height: 26px; border-radius: 50%; object-fit: cover; vertical-align: middle; margin-right: 5px;"> Logout`;
+                    } else {
+                        newLink.innerHTML = `<i class="fa-solid fa-right-from-bracket"></i> Logout`;
+                    }
+                    
+                    newLink.href = "#";
+                    newLink.addEventListener("click", async (e) => {
+                        e.preventDefault();
+                        try {
+                            await signOut(auth);
+                            window.location.reload();
+                        } catch (error) {
+                            console.error("Logout Error:", error);
+                        }
+                    });
+                } else {
+                    newLink.innerHTML = `<i class="fa-solid fa-user"></i> Student Login`;
+                    newLink.href = "login.html";
+                }
+            });
+        });
+
+        // Form Submission Handler with Duplicate Course Prevention
+        const enrollmentForm = document.getElementById('enrollment-form');
+        enrollmentForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Check if student is logged in
+            if (!currentUser) {
+                alert("You must log in first to submit an enrollment or contact message!");
+                window.location.href = "login.html";
+                return;
+            }
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const course = document.getElementById('course-select').value;
+            const submitBtn = document.getElementById('submit-btn');
+
+            if (!course) {
+                alert("Please select a course before submitting.");
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Checking...";
+
+            try {
+                // Check if the user has already enrolled in this specific course
+                const q = query(
+                    collection(db, "enrollments"), 
+                    where("uid", "==", currentUser.uid),
+                    where("selectedCourse", "==", course)
+                );
+                
+                const querySnapshot = await getDocs(q);
+
+                if (!querySnapshot.empty) {
+                    alert(`⚠️ You have already enrolled in "${course}" using this account. You can apply for different courses, but not the same one twice.`);
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "Submit Enrollment";
+                    return;
+                }
+
+                submitBtn.innerText = "Submitting...";
+
+                // Save enrollment data to Firestore if no duplicate exists
+                await addDoc(collection(db, "enrollments"), {
+                    uid: currentUser.uid,
+                    studentName: name,
+                    studentEmail: email,
+                    phoneNumber: phone,
+                    selectedCourse: course,
+                    timestamp: serverTimestamp()
+                });
+
+                alert("🎉 Enrollment submitted successfully! Your details have been sent to Techdust. We will contact you soon.");
+                enrollmentForm.reset();
+                
+                // Re-fill name and email back in case they want to submit another query
+                if (currentUser) {
+                    document.getElementById('name').value = currentUser.displayName || "";
+                    document.getElementById('email').value = currentUser.email || "";
+                }
+            } catch (error) {
+                console.error("Error saving enrollment: ", error);
+                alert("❌ Failed to submit. Please check your connection and try again.");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Submit Enrollment";
+            }
+        });
+    </script>
+
+</body>
+</html>
